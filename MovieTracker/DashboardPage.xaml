@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MovieTracker"
+             x:Class="MovieTracker.DashboardPage"
+             Title="Přehled">
+
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout x:Name="MainContent" Padding="16" Spacing="16" IsVisible="False">
+
+                
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                    <VerticalStackLayout>
+                        <Label Text="Moje filmy a seriály" Style="{StaticResource HeadlineLabel}" />
+                        <Label Text="Sleduj, co jsi už viděl" Style="{StaticResource MutedLabel}" />
+                    </VerticalStackLayout>
+                    <Button Grid.Column="1" Text="+ Přidat" VerticalOptions="Center"
+                            Style="{StaticResource PrimaryButton}" Clicked="OnAddClicked" />
+                </Grid>
+
+                
+                <Grid x:Name="CardsGrid" ColumnDefinitions="*,*,*,*" RowDefinitions="Auto,Auto"
+                      ColumnSpacing="12" RowSpacing="12">
+
+                    <Border x:Name="CardWatched" Style="{StaticResource CardBorder}"
+                            Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Grid ColumnDefinitions="40,*" ColumnSpacing="10">
+                            <Image Source="icon_movie.png" WidthRequest="40" HeightRequest="40" VerticalOptions="Start" />
+                            <VerticalStackLayout Grid.Column="1">
+                                <Label x:Name="WatchedValue" Text="0" Style="{StaticResource CardValueLabel}" />
+                                <Label Text="Zhlédnuté filmy" Style="{StaticResource MutedLabel}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+
+                    <Border x:Name="CardSeries" Style="{StaticResource CardBorder}"
+                            Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2">
+                        <Grid ColumnDefinitions="40,*" ColumnSpacing="10">
+                            <Image Source="icon_tv.png" WidthRequest="40" HeightRequest="40" VerticalOptions="Start" />
+                            <VerticalStackLayout Grid.Column="1">
+                                <Label x:Name="SeriesValue" Text="0" Style="{StaticResource CardValueLabel}" />
+                                <Label Text="Zhlédnuté seriály" Style="{StaticResource MutedLabel}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+
+                    <Border x:Name="CardHours" Style="{StaticResource CardBorder}"
+                            Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Grid ColumnDefinitions="40,*" ColumnSpacing="10">
+                            <Image Source="icon_web.png" WidthRequest="40" HeightRequest="40" VerticalOptions="Start" />
+                            <VerticalStackLayout Grid.Column="1">
+                                <Label x:Name="HoursValue" Text="0" Style="{StaticResource CardValueLabel}" />
+                                <Label Text="Hodin u obrazovky" Style="{StaticResource MutedLabel}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+
+                    <Border x:Name="CardRating" Style="{StaticResource CardBorder}"
+                            Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2">
+                        <Grid ColumnDefinitions="40,*" ColumnSpacing="10">
+                            <Image Source="icon_settings.png" WidthRequest="40" HeightRequest="40" VerticalOptions="Start" />
+                            <VerticalStackLayout Grid.Column="1">
+                                <Label x:Name="RatingValue" Text="0" Style="{StaticResource CardValueLabel}" />
+                                <Label Text="Průměrné hodnocení" Style="{StaticResource MutedLabel}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                
+                <Border Style="{StaticResource CardBorder}">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Roční cíl: 24 titulů" Style="{StaticResource TitleLabel}" />
+                        <ProgressBar x:Name="YearProgress" Progress="0" />
+                        <Label x:Name="ProgressLabel" Text="0 / 24 (0 %)" Style="{StaticResource MutedLabel}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Style="{StaticResource CardBorder}">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Rychlé filtry" Style="{StaticResource TitleLabel}" />
+                        <FlexLayout Wrap="Wrap" Direction="Row" AlignItems="Center" JustifyContent="Start">
+                            <Button Text="Vše" CommandParameter="all" Margin="0,0,8,8"
+                                    Style="{StaticResource TonalButton}" Clicked="OnTypeFilterClicked" />
+                            <Button Text="Filmy" CommandParameter="movie" Margin="0,0,8,8"
+                                    Style="{StaticResource TonalButton}" Clicked="OnTypeFilterClicked" />
+                            <Button Text="Seriály" CommandParameter="series" Margin="0,0,8,8"
+                                    Style="{StaticResource TonalButton}" Clicked="OnTypeFilterClicked" />
+                            <HorizontalStackLayout Spacing="6" Margin="0,0,12,8">
+                                <Switch x:Name="OnlyWatchedSwitch" Toggled="OnWatchedToggled" VerticalOptions="Center" />
+                                <Label Text="Jen zhlédnuté" VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Spacing="2" Margin="0,0,0,8">
+                                <CheckBox x:Name="OnlyFavCheck" CheckedChanged="OnFavChanged" VerticalOptions="Center" />
+                                <Label Text="Oblíbené" VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                        </FlexLayout>
+                        <Label x:Name="FilterInfo" Text="Zobrazeno: vše" Style="{StaticResource MutedLabel}" />
+                    </VerticalStackLayout>
+                </Border>
+
+               
+                <Label Text="Moje záznamy" Style="{StaticResource TitleLabel}" />
+                <Label x:Name="EmptyLabel" Text="Nic nenalezeno." IsVisible="False" Style="{StaticResource MutedLabel}" />
+                <VerticalStackLayout x:Name="MoviesLayout" Spacing="10">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="local:Movie">
+                            <Border Style="{StaticResource CardBorder}" Padding="12">
+                                <Grid ColumnDefinitions="40,*,Auto" ColumnSpacing="12">
+                                    <Image Source="{Binding Icon}" WidthRequest="40" HeightRequest="40" VerticalOptions="Center" />
+                                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                                        <Label Text="{Binding Title}" Style="{StaticResource TitleLabel}" />
+                                        <Label Text="{Binding Subtitle}" Style="{StaticResource MutedLabel}" />
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" HorizontalOptions="End">
+                                        <Label Text="{Binding RatingText}" HorizontalTextAlignment="End" />
+                                        <Label Text="{Binding FavoriteMark}" HorizontalTextAlignment="End"
+                                               Style="{StaticResource CardValueLabel}" FontSize="18" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+       
+        <ActivityIndicator x:Name="Loading" IsRunning="True" IsVisible="True"
+                           HorizontalOptions="Center" VerticalOptions="Center"
+                           WidthRequest="48" HeightRequest="48" />
+    </Grid>
+</ContentPage>

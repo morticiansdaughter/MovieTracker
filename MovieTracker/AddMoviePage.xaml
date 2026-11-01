@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovieTracker.AddMoviePage"
+             Title="Nový záznam">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+            <Border Style="{StaticResource CardBorder}">
+                <VerticalStackLayout Spacing="12">
+
+                    <Label Text="Název" Style="{StaticResource TitleLabel}" />
+                    <Entry x:Name="TitleEntry" Placeholder="např. Matrix" MaxLength="60"
+                           TextChanged="OnFormTextChanged" />
+                    <Label x:Name="TitleError" Text="" TextColor="Red" FontSize="13" />
+
+                    <Label x:Name="RuntimeCaption" Text="Délka v minutách" Style="{StaticResource TitleLabel}" />
+                    <Entry x:Name="RuntimeEntry" Placeholder="např. 120" Keyboard="Numeric" MaxLength="4"
+                           TextChanged="OnFormTextChanged" />
+                    <Label x:Name="RuntimeError" Text="" TextColor="Red" FontSize="13" />
+
+                    <Label x:Name="RatingLabel" Text="Hodnocení: 3 / 5" Style="{StaticResource TitleLabel}" />
+                    <Slider x:Name="RatingSlider" Minimum="1" Maximum="5" Value="3"
+                            ValueChanged="OnRatingChanged" />
+
+                    <HorizontalStackLayout Spacing="8">
+                        <Switch x:Name="SeriesSwitch" Toggled="OnSeriesToggled" VerticalOptions="Center" />
+                        <Label x:Name="TypeLabel" Text="Typ: film" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Spacing="4">
+                        <CheckBox x:Name="WatchedCheck" IsChecked="True" VerticalOptions="Center" />
+                        <Label Text="Už jsem to zhlédl(a)" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Spacing="4">
+                        <CheckBox x:Name="FavoriteCheck" VerticalOptions="Center" />
+                        <Label Text="Oblíbené" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+
+                    <BoxView HeightRequest="1" Color="Gray" Opacity="0.4" />
+
+                    <HorizontalStackLayout Spacing="8">
+                        <Switch x:Name="FailSwitch" VerticalOptions="Center" />
+                        <Label Text="Simulovat selhání uložení (test)" VerticalOptions="Center" Style="{StaticResource MutedLabel}" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <ActivityIndicator x:Name="SavingIndicator" IsRunning="False" IsVisible="False"
+                               HorizontalOptions="Center" />
+
+            <Button x:Name="SaveButton" Text="Uložit" IsEnabled="False"
+                    Style="{StaticResource PrimaryButton}" Clicked="OnSaveClicked" />
+            <Button x:Name="CancelButton" Text="Zrušit"
+                    Style="{StaticResource TonalButton}" Clicked="OnCancelClicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

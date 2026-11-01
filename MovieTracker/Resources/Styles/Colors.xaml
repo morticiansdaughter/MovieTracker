@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!--primary-->
+    <Color x:Key="PrimaryLight">#B01050</Color>
+    <Color x:Key="PrimaryDark">#F070A8</Color>
+    <Color x:Key="OnPrimaryLight">#FFFFFF</Color>
+    <Color x:Key="OnPrimaryDark">#4A0818</Color>
+
+    <!-- buttons -->
+    <Color x:Key="SecondaryContainerLight">#F8A8CC</Color>
+    <Color x:Key="SecondaryContainerDark">#B01050</Color>
+    <Color x:Key="OnSecondaryContainerLight">#4A0818</Color>
+    <Color x:Key="OnSecondaryContainerDark">#FFF0F6</Color>
+
+    <!-- bg -->
+    <Color x:Key="BackgroundLight">#FFF0F6</Color>
+    <Color x:Key="BackgroundDark">#2B040D</Color>
+
+    <!-- Karty -->
+    <Color x:Key="SurfaceLight">#FCD4E6</Color>
+    <Color x:Key="SurfaceDark">#540521</Color>
+
+    <!-- Text -->
+    <Color x:Key="OnSurfaceLight">#4A0818</Color>
+    <Color x:Key="OnSurfaceDark">#FFF0F6</Color>
+    <Color x:Key="OnSurfaceVariantLight">#780830</Color>
+    <Color x:Key="OnSurfaceVariantDark">#F8A8CC</Color>
+
+    <!-- warning -->
+    <Color x:Key="ErrorLight">#E65100</Color>
+    <Color x:Key="ErrorDark">#FFB74D</Color>
+    <Color x:Key="OnErrorLight">#FFFFFF</Color>
+    <Color x:Key="OnErrorDark">#4A2800</Color>
+</ResourceDictionary>

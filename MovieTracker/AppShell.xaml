@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MovieTracker.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MovieTracker"
+    Title="CinemaLog"
+    FlyoutBehavior="Flyout"
+    Shell.BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceLight}, Dark={StaticResource SurfaceDark}}"
+    Shell.ForegroundColor="{AppThemeBinding Light={StaticResource PrimaryLight}, Dark={StaticResource PrimaryDark}}"
+    Shell.TitleColor="{AppThemeBinding Light={StaticResource OnSurfaceLight}, Dark={StaticResource OnSurfaceDark}}"
+    Shell.FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource BackgroundLight}, Dark={StaticResource BackgroundDark}}">
+
+    <Shell.Resources>
+        <Style TargetType="Label" Class="FlyoutItemLabelStyle">
+            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource OnSurfaceLight}, Dark={StaticResource OnSurfaceDark}}" />
+        </Style>
+    </Shell.Resources>
+
+    <!--bocni menu.-->
+    <ShellContent Title="Přehled" Icon="icon_movie.png"
+                  ContentTemplate="{DataTemplate local:DashboardPage}" Route="DashboardPage" />
+    <ShellContent Title="Web ČSFD" Icon="icon_web.png"
+                  ContentTemplate="{DataTemplate local:WebPage}" Route="WebPage" />
+    <ShellContent Title="Nastavení" Icon="icon_settings.png"
+                  ContentTemplate="{DataTemplate local:Settings}" Route="Settings" />
+</Shell>

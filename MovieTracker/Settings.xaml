@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovieTracker.Settings"
+             Title="Nastavení">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+            <Label Text="Nastavení" Style="{StaticResource HeadlineLabel}" />
+
+            <!-- Motiv -->
+            <Border Style="{StaticResource CardBorder}">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Motiv aplikace" Style="{StaticResource TitleLabel}" />
+                    <RadioButton x:Name="LightRadio" GroupName="Theme" Content="Světlý" CheckedChanged="OnThemeChecked" />
+                    <RadioButton x:Name="DarkRadio" GroupName="Theme" Content="Tmavý" CheckedChanged="OnThemeChecked" />
+                    <RadioButton x:Name="SystemRadio" GroupName="Theme" Content="Podle systému" CheckedChanged="OnThemeChecked" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Zabezpečení -->
+            <Border Style="{StaticResource CardBorder}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Zabezpečení" Style="{StaticResource TitleLabel}" />
+
+                    <Entry x:Name="UserNameEntry" Placeholder="Uživatelské jméno" MaxLength="30" />
+                    <Entry x:Name="PasswordEntry" Placeholder="Heslo" IsPassword="True"
+                           TextChanged="OnPasswordTextChanged" />
+
+                    <HorizontalStackLayout Spacing="8">
+                        <Switch x:Name="ShowPasswordSwitch" Toggled="OnShowPasswordToggled" VerticalOptions="Center" />
+                        <Label Text="Zobrazit heslo" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+
+                    <Label x:Name="StrengthLabel" Text="Síla hesla: —" Style="{StaticResource TitleLabel}" />
+                    <ProgressBar x:Name="StrengthBar" Progress="0" />
+                    <Label x:Name="ChecklistLabel" Style="{StaticResource MutedLabel}" />
+
+                    <Button x:Name="SaveUserButton" Text="Uložit do JSON" Style="{StaticResource PrimaryButton}"
+                            Clicked="OnSaveUserClicked" />
+                    <Button x:Name="DeleteUserButton" Text="Smazat uložený profil" Style="{StaticResource WarningButton}"
+                            Clicked="OnDeleteUserClicked" />
+                    <Label x:Name="StatusLabel" Text="" Style="{StaticResource MutedLabel}" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

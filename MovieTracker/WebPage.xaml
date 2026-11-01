@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovieTracker.WebPage"
+             Title="Web ČSFD">
+
+    <Grid RowDefinitions="Auto,Auto,*" Padding="16" RowSpacing="10">
+
+        <Border Grid.Row="0" Style="{StaticResource CardBorder}">
+            <ScrollView MaximumHeightRequest="130">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Česko-Slovenská filmová databáze" Style="{StaticResource TitleLabel}" />
+                    <Label Style="{StaticResource MutedLabel}"
+                           Text="Zobrazuje web csfd.cz s hodnocením filmů a seriálů, recenzemi a tipy na co se dívat. Z bezpečnostních důvodů zůstaneš jen na doméně csfd.cz, jiné weby jsou zablokované." />
+                </VerticalStackLayout>
+            </ScrollView>
+        </Border>
+
+        <Grid Grid.Row="1" ColumnDefinitions="Auto,Auto,*" ColumnSpacing="8">
+            <Button Text="← Zpět" Style="{StaticResource TonalButton}" Clicked="OnBackClicked" />
+            <Button Grid.Column="1" Text="↻ Obnovit" Style="{StaticResource TonalButton}" Clicked="OnReloadClicked" />
+            <ProgressBar Grid.Column="2" x:Name="LoadBar" Progress="0" IsVisible="False" VerticalOptions="Center" />
+        </Grid>
+
+        <Border Grid.Row="2" Style="{StaticResource CardBorder}" Padding="0">
+            <Grid>
+                <WebView x:Name="Browser" Source="https://www.csfd.cz"
+                         Navigating="OnNavigating" Navigated="OnNavigated" />
+                <ActivityIndicator x:Name="WebLoading" IsRunning="False" IsVisible="False"
+                                   HorizontalOptions="Center" VerticalOptions="Center" />
+            </Grid>
+        </Border>
+    </Grid>
+</ContentPage>
